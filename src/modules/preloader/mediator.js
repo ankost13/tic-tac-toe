@@ -11,7 +11,7 @@ export class GamePreloaderMediator extends BaseMediator {
     }
 
     notificationOutside() {
-        this.mapNotification(PreloaderNotification.HIDE_PRELOADER_COMPLETED, async (data)=> {
+        this.mapNotification(PreloaderNotification.HIDE_PRELOADER, async (data)=> {
             await setAnimationTimeoutSync(1);
             this.view.hide();
             await setAnimationTimeoutSync(.5);
