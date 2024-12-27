@@ -11,4 +11,4 @@ await app.init({
 });
 
 document.body.appendChild(app.canvas);
-globalThis.PIXI_APP = app;
+globalThis.__PIXI_APP__ = app;
