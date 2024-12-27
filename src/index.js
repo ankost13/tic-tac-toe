@@ -5,7 +5,7 @@ await app.init({
     background: '#123',
     width: window.innerWidth,
     height: window.innerHeight,
-    resolution: window.devicePixelRatio || 1,
+    // resolution: window.devicePixelRatio || 1,
     autoResize: true,
     resizeTo: window,
 });
