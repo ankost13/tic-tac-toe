@@ -1,6 +1,7 @@
 import {View} from "../../utils/view";
 import {Assets, Sprite} from "pixi.js";
 import gsap from 'gsap';
+import {randomInteger, setAnimationTimeoutSync} from "../../utils/helperFunction";
 
 export class BgView extends View {
     constructor(parent) {
@@ -14,24 +15,30 @@ export class BgView extends View {
     createBgSprite() {
         this.bg = new Sprite({
             texture: Assets.get("bg"),
-            alpha: 1,
+            alpha: .1,
             anchor: {
                 x: 0.5,
                 y: 0.5,
             },
-            scale: 0.1,
+            scale: 1,
         })
         this.addChild(this.bg);
     }
 
-    playAnimationBgTest() {
-        gsap.to(this.bg.scale, {
-            x: 1,
-            y: 1,
-            ease: "back.inOut",
-            repeat: -1,
+
+    async playAnimationBgTest() {
+        const gs = gsap.timeline();
+        gs.to(this.bg, {
+            alpha: 1, // ease: "circ.in",
             yoyo: true,
-            duration: 3,
+            duration: 2,
         })
+        gs.to(this.bg, {
+            alpha: 0.5, duration: 2,
+        })
+
+        await setAnimationTimeoutSync(randomInteger(6, 10));
+        this.playAnimationBgTest();
     }
+
 }
