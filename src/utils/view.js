@@ -14,7 +14,7 @@ export class View extends Container {
     }
 
     notifyToMediator(notification, data) {
-        this.emitter.emit(notification, {data});
+        this.emitter.emit(notification, data);
     }
 
 }
