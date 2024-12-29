@@ -1,25 +1,25 @@
 import {View} from "../../utils/view";
 import {Assets, Sprite} from "pixi.js";
 
-export class BgView extends View {
+export class FieldView extends View {
     constructor(parent) {
         super(parent);
-
-        this.createBgSprite();
+        this.createFieldSprite();
         this.position.set(window.innerWidth / 2, window.innerHeight / 2);
     }
 
-    createBgSprite() {
-        this.bg = new Sprite({
-            texture: Assets.get("bg"),
-            alpha: .9,
+    createFieldSprite() {
+        this.field = new Sprite({
+            texture: Assets.get("field"),
+            alpha: 1,
+            //zIndex: 1,
             anchor: {
                 x: 0.5,
                 y: 0.5,
             },
-            scale: 1,
+            scale: .6,
         })
-        this.addChild(this.bg);
+        this.addChild(this.field);
     }
-
 }
+

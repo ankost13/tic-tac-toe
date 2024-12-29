@@ -1,4 +1,4 @@
-import {Proxy} from "./proxy";
+import {Proxy} from "../modules/proxy/proxy";
 import {GLOBAL_EMITTER} from "./eventEmitter";
 
 export class BaseMediator {

@@ -5,8 +5,11 @@ import {PreloaderView} from "../modules/preloader/view";
 import {GameMediator} from "./mediator";
 import {BgMediator} from "../modules/bg/bgMediator";
 import {BgView} from "../modules/bg/bgView";
+import {FieldView} from "../modules/gameField/fieldView";
+import {FieldMediator} from "../modules/gameField/fieldMediator";
 
 export class App extends Application {
+
     constructor(data) {
         super(data)
 
@@ -15,6 +18,7 @@ export class App extends Application {
         this.loadAssets().then(() => {
             this.gameMediator.resourcesLoaded();
             this.registerBg();
+            this.registerField();
         })
     }
 
@@ -23,11 +27,6 @@ export class App extends Application {
         for (const bundle of manifest.bundles) {
             await Assets.loadBundle(bundle.name);
         }
-
-        // const sp1 = new Sprite({
-        //     texture: Assets.get("img1")
-        // })
-        // this.stage.addChild(sp1)
     }
 
     registerPreloader() {
@@ -42,5 +41,12 @@ export class App extends Application {
         const parent = new Container();
         this.stage.addChild(parent);
         mediator.initView(BgView, parent);
+    }
+
+    registerField() {
+        const mediator = new FieldMediator();
+        const parent = new Container();
+        this.stage.addChild(parent);
+        mediator.initView(FieldView, parent);
     }
 }

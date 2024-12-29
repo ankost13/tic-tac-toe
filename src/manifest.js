@@ -3,8 +3,10 @@ export const manifest = {
         {
             name: "image",
             assets: {
-                img1: "assets/img/img_1.jpg",
                 bg: "assets/img/bg.jpg",
+                field: "assets/img/field.png",
+                o: "assets/img/o.png",
+                x: "assets/img/x.png",
             }
         },
     ]
