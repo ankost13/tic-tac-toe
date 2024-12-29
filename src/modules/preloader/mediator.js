@@ -15,10 +15,5 @@ export class GamePreloaderMediator extends BaseMediator {
             await setAnimationTimeoutSync(1);
             this.view.hide();
         });
-
-        const as = [setAnimationTimeoutSync(1), setAnimationTimeoutSync(.5), setAnimationTimeoutSync(3)]
-
-        await Promise.allSettled(as)
-        console.error(123)
     }
 }

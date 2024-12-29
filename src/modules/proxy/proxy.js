@@ -24,8 +24,6 @@ export class Proxy { //для даних
 
     setMapField(x, y, indicator) { // indicator o or x
         this.mapField[x][y] = indicator
-
-        console.error(this.mapField)
     }
 
 }
