@@ -7,6 +7,7 @@ import {BgMediator} from "../modules/bg/bgMediator";
 import {BgView} from "../modules/bg/bgView";
 import {FieldView} from "../modules/gameField/fieldView";
 import {FieldMediator} from "../modules/gameField/fieldMediator";
+import {GameLogicMediator} from "../modules/gameLogic/gameLogicMediator";
 
 export class App extends Application {
 
@@ -19,6 +20,7 @@ export class App extends Application {
             this.gameMediator.resourcesLoaded();
             this.registerBg();
             this.registerField();
+            this.registerGameLogic();
         })
     }
 
@@ -48,5 +50,9 @@ export class App extends Application {
         const parent = new Container();
         this.stage.addChild(parent);
         mediator.initView(FieldView, parent);
+    }
+
+    registerGameLogic() {
+        new GameLogicMediator();
     }
 }

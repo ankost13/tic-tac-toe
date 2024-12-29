@@ -1,14 +1,17 @@
 import {View} from "../../utils/view";
-import {Assets, Container, Graphics, Sprite} from "pixi.js";
+import {Assets, Container, Sprite} from "pixi.js";
+import {setAnimationTimeoutSync} from "../../utils/helperFunction";
 
 export class FieldView extends View {
+
+    static SQUARE_ON_CLICK = "FieldView.SQUARE_ON_CLICK"
+
     constructor(parent) {
         super(parent);
         this.createFieldSprite();
         this.position.set(window.innerWidth / 2, window.innerHeight / 2);
         this.createInteractiveSquare();
 
-        this.setInteractiveSquare(true);
         this.addEventSquare();
     }
 
@@ -33,12 +36,13 @@ export class FieldView extends View {
         const squareHeight = 180;
         this.collectionSquare = [];
         for (let i = 0; i < 9; i++) {
-            const square = new Graphics();
-            square.rect(0, 0, squareWidth, squareHeight);
+            const square = new Sprite();
+            square.texture = Assets.get("o");
+            square.anchor = 0.5;
             square.x = (i % 3) * 185 - 185;
             square.y = parseInt(i / 3 + "") * 185 - 185;
-            square.pivot.set(90, 90);
-            square.fill(0xde3249);
+            square.scale = 0.8;
+            square.alpha = 0;
             parentForSquare.addChild(square);
             square.inUsed = false;
             this.collectionSquare.push(square);
@@ -53,13 +57,29 @@ export class FieldView extends View {
     }
 
     addEventSquare() {
-        this.collectionSquare.forEach((square) => {
+        this.collectionSquare.forEach((square, index) => {
             if (!square.inUsed) {
                 square.on("pointerup", () => {
-
+                    square.inUsed = true;
+                    square.texture = Assets.get("x");
+                    square.alpha = 1;
+                    this.setInteractiveSquare(false);
+                    this.notifyToMediator(FieldView.SQUARE_ON_CLICK, index);
                 })
             }
         })
+    }
+
+    async computerStepView(index, isEndGame) {
+        this.collectionSquare[index].texture = Assets.get("o");
+        this.collectionSquare[index].inUsed = true;
+        this.collectionSquare[index].interactive = false;
+        this.collectionSquare[index].alpha = 1;
+
+        if (!isEndGame) {
+            await setAnimationTimeoutSync(.5)
+            this.setInteractiveSquare(true);
+        }
     }
 }
 
