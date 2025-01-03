@@ -8,6 +8,8 @@ import {BgView} from "../modules/bg/bgView";
 import {FieldView} from "../modules/gameField/fieldView";
 import {FieldMediator} from "../modules/gameField/fieldMediator";
 import {GameLogicMediator} from "../modules/gameLogic/gameLogicMediator";
+import {PopupMediator} from "../modules/popup/popupMediator";
+import {PopupView} from "../modules/popup/popupView";
 
 export class App extends Application {
 
@@ -21,6 +23,7 @@ export class App extends Application {
             this.registerBg();
             this.registerField();
             this.registerGameLogic();
+            this.registerPopup();
         })
     }
 
@@ -54,5 +57,12 @@ export class App extends Application {
 
     registerGameLogic() {
         new GameLogicMediator();
+    }
+
+    registerPopup() {
+        const mediator = new PopupMediator();
+        const parent = new Container();
+        this.stage.addChild(parent);
+        mediator.initView(PopupView, parent)
     }
 }

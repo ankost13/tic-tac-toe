@@ -14,8 +14,8 @@ export class FieldMediator extends BaseMediator {
             this.view.setInteractiveSquare(true);
         })
 
-        this.mapNotification(GameFieldNotification.COMPUTER_STEP, (index) => {
-            this.view.computerStepView(index);
+        this.mapNotification(GameFieldNotification.COMPUTER_STEP, (data) => {
+            this.view.computerStepView(data.index, data.isEnd);
         })
     }
 
