@@ -11,7 +11,6 @@ export class FieldView extends View {
         this.createFieldSprite();
         this.position.set(window.innerWidth / 2, window.innerHeight / 2);
         this.createInteractiveSquare();
-
         this.addEventSquare();
     }
 
@@ -19,7 +18,6 @@ export class FieldView extends View {
         this.field = new Sprite({
             texture: Assets.get("field"),
             alpha: 1,
-            //zIndex: 1,
             anchor: {
                 x: 0.5,
                 y: 0.5,
@@ -80,6 +78,25 @@ export class FieldView extends View {
             await setAnimationTimeoutSync(.5)
             this.setInteractiveSquare(true);
         }
+    }
+
+    showWinnersCombination(data) {
+        this.winnersLine = new Sprite({
+            texture: Assets.get("line"),
+            alpha: 1,
+            anchor: {
+                x: data.x,
+                y: data.y,
+            },
+            scale:{
+                x: data.scaleX,
+                y: data.scaleY,
+            },
+            angle: data.angle,
+        })
+
+        this.addChild(this.winnersLine);
+        this.winnersLine._zIndex = 100;
     }
 }
 

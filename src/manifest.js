@@ -7,7 +7,8 @@ export const manifest = {
                 field: "assets/img/field.png",
                 o: "assets/img/o.png",
                 x: "assets/img/x.png",
-                popup1: "assets/img/popup.png"
+                popup: "assets/img/popup.png",
+                line: "assets/img/line.png",
             }
         },
     ]

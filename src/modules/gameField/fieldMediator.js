@@ -17,6 +17,10 @@ export class FieldMediator extends BaseMediator {
         this.mapNotification(GameFieldNotification.COMPUTER_STEP, (data) => {
             this.view.computerStepView(data.index, data.isEnd);
         })
+
+        this.mapNotification(GameFieldNotification.WINNER_COMBINATION, (data) =>{
+            this.view.showWinnersCombination(data);
+        })
     }
 
     catchUINotification() {

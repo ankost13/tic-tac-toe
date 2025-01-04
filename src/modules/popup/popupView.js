@@ -13,7 +13,7 @@ export class PopupView extends View {
 
     createPopupSprite() {
         this.popup = new Sprite({
-            texture: Assets.get("popup1"),
+            texture: Assets.get("popup"),
             alpha: 1,
             anchor: {
                 x: 0.5,
