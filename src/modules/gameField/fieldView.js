@@ -30,8 +30,6 @@ export class FieldView extends View {
     createInteractiveSquare() {
         const parentForSquare = new Container();
         this.addChild(parentForSquare);
-        const squareWidth = 180;
-        const squareHeight = 180;
         this.collectionSquare = [];
         for (let i = 0; i < 9; i++) {
             const square = new Sprite();
