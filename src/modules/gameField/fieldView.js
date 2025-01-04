@@ -31,12 +31,13 @@ export class FieldView extends View {
         const parentForSquare = new Container();
         this.addChild(parentForSquare);
         this.collectionSquare = [];
+        const startPosition = 185;
         for (let i = 0; i < 9; i++) {
             const square = new Sprite();
             square.texture = Assets.get("o");
             square.anchor = 0.5;
-            square.x = (i % 3) * 185 - 185;
-            square.y = parseInt(i / 3 + "") * 185 - 185;
+            square.x = (i % 3) * startPosition - startPosition;
+            square.y = parseInt(i / 3 + "") * startPosition - startPosition;
             square.scale = 0.8;
             square.alpha = 0;
             parentForSquare.addChild(square);
