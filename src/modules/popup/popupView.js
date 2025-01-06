@@ -34,13 +34,13 @@ export class PopupView extends View {
             x: 0.6,
             y: 0.6,
             duration: 1,
-        })
+        });
         await setAnimationTimeoutSync(3);
         gsap.to(this.popup.scale, {
             x: 0,
             y: 0,
             duration: 1,
-        })
+        });
     }
 
     createTextMassage() {

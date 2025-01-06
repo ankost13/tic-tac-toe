@@ -12,20 +12,20 @@ export class FieldMediator extends BaseMediator {
     catchOutNotification() {
         this.mapNotification(GameFieldNotification.PLAYER_STEP, () => {
             this.view.setInteractiveSquare(true);
-        })
+        });
 
         this.mapNotification(GameFieldNotification.COMPUTER_STEP, (data) => {
             this.view.computerStepView(data.index, data.isEnd);
-        })
+        });
 
-        this.mapNotification(GameFieldNotification.WINNER_COMBINATION, (data) =>{
+        this.mapNotification(GameFieldNotification.WINNER_COMBINATION, (data) => {
             this.view.showWinnersCombination(data);
-        })
+        });
     }
 
     catchUINotification() {
         this.mapNotification(FieldView.SQUARE_ON_CLICK, (index) => {
-            this.sendNotification(GameFieldNotification.SQUARE_ON_CLICK, index)
-        })
+            this.sendNotification(GameFieldNotification.SQUARE_ON_CLICK, index);
+        });
     }
 }

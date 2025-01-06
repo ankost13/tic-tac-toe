@@ -30,27 +30,17 @@ export class Proxy { //для даних
     }
 
     setMapField(x, y, indicator) { // indicator o or x
-        this.mapField[x][y] = indicator
-
-        console.error(x, y, this.mapField)
+        this.mapField[x][y] = indicator;
     }
 
     getFistPlayer() {
         if (randomInteger(0, 1)) {
-            this.whoseTurn = probableGamer.player
+            this.whoseTurn = probableGamer.player;
         } else {
-            this.whoseTurn = probableGamer.computer
+            this.whoseTurn = probableGamer.computer;
         }
 
-        return this.whoseTurn
-    }
-
-    changeWhoseTurn() {
-        if (this.whoseTurn === probableGamer.player) {
-            this.whoseTurn = probableGamer.computer
-        } else {
-            this.whoseTurn = probableGamer.player
-        }
+        return this.whoseTurn;
     }
 
 }

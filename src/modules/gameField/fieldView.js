@@ -50,7 +50,7 @@ export class FieldView extends View {
         this.collectionSquare.forEach((square) => {
             square.interactive = !square.inUsed && on;
             square.cursor = "pointer";
-        })
+        });
     }
 
     addEventSquare() {
@@ -62,9 +62,9 @@ export class FieldView extends View {
                     square.alpha = 1;
                     this.setInteractiveSquare(false);
                     this.notifyToMediator(FieldView.SQUARE_ON_CLICK, index);
-                })
+                });
             }
-        })
+        });
     }
 
     async computerStepView(index, isEndGame) {
@@ -74,7 +74,7 @@ export class FieldView extends View {
         this.collectionSquare[index].alpha = 1;
 
         if (!isEndGame) {
-            await setAnimationTimeoutSync(.5)
+            await setAnimationTimeoutSync(.5);
             this.setInteractiveSquare(true);
         }
     }
@@ -87,7 +87,7 @@ export class FieldView extends View {
                 x: data.x,
                 y: data.y,
             },
-            scale:{
+            scale: {
                 x: data.scaleX,
                 y: data.scaleY,
             },

@@ -108,6 +108,5 @@ export class GameLogicMediator extends BaseMediator {
         }
     }
 
-
 }
 
