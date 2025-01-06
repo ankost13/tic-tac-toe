@@ -97,5 +97,15 @@ export class FieldView extends View {
         this.addChild(this.winnersLine);
         this.winnersLine._zIndex = 100;
     }
+
+    refreshField() {
+        this.collectionSquare.forEach((square) => {
+            square.texture = Assets.get("o");
+            square.anchor = 0.5;
+            square.alpha = 0;
+            square.inUsed = false;
+        })
+        this.winnersLine.destroy({children: true});
+    }
 }
 

@@ -21,6 +21,10 @@ export class FieldMediator extends BaseMediator {
         this.mapNotification(GameFieldNotification.WINNER_COMBINATION, (data) => {
             this.view.showWinnersCombination(data);
         });
+
+        this.mapNotification(GameFieldNotification.REFRESH_FIELD, () => {
+            this.view.refreshField();
+        });
     }
 
     catchUINotification() {

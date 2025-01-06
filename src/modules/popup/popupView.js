@@ -35,7 +35,7 @@ export class PopupView extends View {
             y: 0.6,
             duration: 1,
         });
-        await setAnimationTimeoutSync(3);
+        await setAnimationTimeoutSync(2);
         gsap.to(this.popup.scale, {
             x: 0,
             y: 0,
