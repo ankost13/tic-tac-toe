@@ -86,7 +86,7 @@ export class GameLogicMediator extends BaseMediator {
 
     checkDrawResult() {
         if ((this.proxy.indexes.length === 0) && (!this.checkResultGame("x")) && (!this.checkResultGame("0"))) {
-            setAnimationTimeoutSync(1).then(() => {
+            setAnimationTimeoutSync(0.5).then(() => {
                 this.sendNotification(PopupNotificationNotification.WINNER, "draw");
             })
             this.resetGame();
