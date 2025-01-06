@@ -56,56 +56,31 @@ export class GameLogicMediator extends BaseMediator {
 
 
      checkResultGame(indicator) {
-        //TODO треба логіка на перевірку результату гри
         if (this.proxy.mapField[0][0] === this.proxy.mapField[0][1] && this.proxy.mapField[0][0] === this.proxy.mapField[0][2] && this.proxy.mapField[0][0] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: 1.5, angle: 0, scaleX: 0.15, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: 1.5, angle: 0, scaleX: 0.15, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[1][0] === this.proxy.mapField[1][1] && this.proxy.mapField[1][0] === this.proxy.mapField[1][2] && this.proxy.mapField[1][0] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: 0.43, angle: 0, scaleX: 0.15, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: 0.43, angle: 0, scaleX: 0.15, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[2][0] === this.proxy.mapField[2][1] && this.proxy.mapField[2][0] === this.proxy.mapField[2][2] && this.proxy.mapField[2][0] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: -0.5, angle: 0, scaleX: 0.15, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: -0.5, angle: 0, scaleX: 0.15, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[0][0] === this.proxy.mapField[1][0] && this.proxy.mapField[0][0] === this.proxy.mapField[2][0] && this.proxy.mapField[0][0] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: -0.5, angle: 90, scaleX: 0.15, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: -0.5, angle: 90, scaleX: 0.15, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[0][1] === this.proxy.mapField[1][1] && this.proxy.mapField[0][1] === this.proxy.mapField[2][1] && this.proxy.mapField[0][1] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: 0.5, angle: 90, scaleX: 0.15, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: 0.5, angle: 90, scaleX: 0.15, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[0][2] === this.proxy.mapField[1][2] && this.proxy.mapField[0][2] === this.proxy.mapField[2][2] && this.proxy.mapField[0][2] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: 1.3, angle: 90, scaleX: 0.15, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: 1.3, angle: 90, scaleX: 0.15, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[0][0] === this.proxy.mapField[1][1] && this.proxy.mapField[0][0] === this.proxy.mapField[2][2] && this.proxy.mapField[0][0] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: 0.5, angle: 45, scaleX: 0.2, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+            this.actionsAfterCheckingResult({x: 0.5, y: 0.5, angle: 45, scaleX: 0.2, scaleY: 0.2, indicator: indicator})
         } else if (this.proxy.mapField[2][0] === this.proxy.mapField[1][1] && this.proxy.mapField[2][0] === this.proxy.mapField[0][2] && this.proxy.mapField[2][0] === indicator) {
-            this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x: 0.5, y: 0.5, angle: -45, scaleX: 0.2, scaleY: 0.2});
-            setAnimationTimeoutSync(1).then(() => {
-                this.sendNotification(PopupNotificationNotification.WINNER, indicator);
-            })
-            return true;
+           this.actionsAfterCheckingResult({x: 0.5, y: 0.5, angle: -45, scaleX: 0.2, scaleY: 0.2, indicator: indicator})
         }
+    }
+
+    actionsAfterCheckingResult(set) {
+        this.sendNotification(GameFieldNotification.WINNER_COMBINATION, {x:set.x, y:set.y, angle: set.angle, scaleX: set.scaleX, scaleY: set.scaleY});
+        setAnimationTimeoutSync(1).then(() => {
+            this.sendNotification(PopupNotificationNotification.WINNER, set.indicator);
+        })
+        return true;
     }
 
 }
