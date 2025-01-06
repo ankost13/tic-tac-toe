@@ -33,6 +33,7 @@ export class GameLogicMediator extends BaseMediator {
 
             await setAnimationTimeoutSync(.5)
             this.computerStep();
+            this.checkDrawResult();
         })
     }
 
@@ -52,6 +53,7 @@ export class GameLogicMediator extends BaseMediator {
         }
         this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.indexes[index], isEnd: false});
         this.removeIndex(this.indexes[index]);
+        this.checkDrawResult();
     }
 
 
@@ -80,6 +82,16 @@ export class GameLogicMediator extends BaseMediator {
         } else if (this.proxy.mapField[2][0] === this.proxy.mapField[1][1] && this.proxy.mapField[2][0] === this.proxy.mapField[0][2] && this.proxy.mapField[2][0] === indicator) {
            this.actionsAfterCheckingResult({x: 0.5, y: 0.5, angle: -45, scaleX: 0.2, scaleY: 0.2, indicator: indicator})
             return true;
+        }
+    }
+
+    checkDrawResult() {
+        if ((this.indexes.length === 0) && (!this.checkResultGame("x")) && (!this.checkResultGame("0"))) {
+            setAnimationTimeoutSync(1).then(() => {
+                this.sendNotification(PopupNotificationNotification.WINNER, "draw");
+            })
+            this.resetGame();
+            //return true;
         }
     }
 
