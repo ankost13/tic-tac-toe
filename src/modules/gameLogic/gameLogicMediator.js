@@ -8,7 +8,6 @@ export class GameLogicMediator extends BaseMediator {
 
     constructor() {
         super();
-        this.indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         this.startGame();
         this.catchNotification();
     }
@@ -38,21 +37,21 @@ export class GameLogicMediator extends BaseMediator {
     }
 
     removeIndex(element) {
-        const index = this.indexes.indexOf(element);
-        this.indexes.splice(index, 1);
+        const index = this.proxy.indexes.indexOf(element);
+        this.proxy.indexes.splice(index, 1);
     }
 
     computerStep() {
-        if (!this.indexes.length) return;
+        if (!this.proxy.indexes.length) return;
 
-        const index = randomInteger(0, this.indexes.length - 1);
-        this.proxy.setMapField(parseInt(this.indexes[index] / 3 + ""), this.indexes[index] % 3, "0");
+        const index = randomInteger(0, this.proxy.indexes.length - 1);
+        this.proxy.setMapField(parseInt(this.proxy.indexes[index] / 3 + ""), this.proxy.indexes[index] % 3, "0");
         if (this.checkResultGame("0")) {
-            this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.indexes[index], isEnd: true});
+            this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.proxy.indexes[index], isEnd: true});
             return
         }
-        this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.indexes[index], isEnd: false});
-        this.removeIndex(this.indexes[index]);
+        this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.proxy.indexes[index], isEnd: false});
+        this.removeIndex(this.proxy.indexes[index]);
         this.checkDrawResult();
     }
 
@@ -86,12 +85,11 @@ export class GameLogicMediator extends BaseMediator {
     }
 
     checkDrawResult() {
-        if ((this.indexes.length === 0) && (!this.checkResultGame("x")) && (!this.checkResultGame("0"))) {
+        if ((this.proxy.indexes.length === 0) && (!this.checkResultGame("x")) && (!this.checkResultGame("0"))) {
             setAnimationTimeoutSync(1).then(() => {
                 this.sendNotification(PopupNotificationNotification.WINNER, "draw");
             })
             this.resetGame();
-            //return true;
         }
     }
 
@@ -107,7 +105,7 @@ export class GameLogicMediator extends BaseMediator {
         setAnimationTimeoutSync(3).then(() => {
             this.proxy.setDefaultMapField();
             this.sendNotification(GameFieldNotification.REFRESH_FIELD);
-            this.indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            this.proxy.setDefaultIndexes();
             this.startGame();
         })
     }

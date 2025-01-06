@@ -10,6 +10,11 @@ export class Proxy { //для даних
 
     constructor() {
         this.setDefaultMapField();
+        this.setDefaultIndexes();
+    }
+
+    setDefaultIndexes() {
+        this.indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     }
 
     static getInstance() {
