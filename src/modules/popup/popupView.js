@@ -30,6 +30,7 @@ export class PopupView extends View {
         const glPos = this.toGlobal(new Point (-20,0))
         const pos = this.toLocal(glPos)
         this.massageText.position.set(pos.x, pos.y);
+        this.soundsManager.play("win");
         gsap.to(this.popup.scale, {
             x: 0.6,
             y: 0.6,

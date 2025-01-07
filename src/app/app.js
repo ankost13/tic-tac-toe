@@ -1,4 +1,4 @@
-import {Application, Assets, Container, Sprite} from "pixi.js";
+import {Application, Assets, Container} from "pixi.js";
 import {manifest} from "../manifest";
 import {GamePreloaderMediator} from "../modules/preloader/mediator";
 import {PreloaderView} from "../modules/preloader/view";
@@ -10,23 +10,28 @@ import {FieldMediator} from "../modules/gameField/fieldMediator";
 import {GameLogicMediator} from "../modules/gameLogic/gameLogicMediator";
 import {PopupMediator} from "../modules/popup/popupMediator";
 import {PopupView} from "../modules/popup/popupView";
-import {GameHowler} from "../utils/howler";
+import {SoundsManager} from "../utils/howler";
 
 export class App extends Application {
 
     constructor(data) {
         super(data)
 
+        this.initGame();
+    }
+
+    async initGame() {
         this.registerPreloader();
-        this.initSounds();
+
+        await this.initSounds();
+        await this.loadAssets();
+
         this.gameMediator = new GameMediator();
-        this.loadAssets().then(() => {
-            this.gameMediator.resourcesLoaded();
-            this.registerBg();
-            this.registerField();
-            this.registerGameLogic();
-            this.registerPopup();
-        })
+        this.gameMediator.resourcesLoaded();
+        this.registerBg();
+        this.registerField();
+        this.registerGameLogic();
+        this.registerPopup();
     }
 
     async loadAssets() {
@@ -68,14 +73,21 @@ export class App extends Application {
         mediator.initView(PopupView, parent)
     }
 
-    initSounds() {
+    async initSounds() {
         const sounds = [
             {
                 name: "backgroundSound",
                 src: "assets/sounds/backgroundSound.mp3",
-                volume: 1,
+                volume: 0.01,
+                loop: true,
+            },
+            {
+                name: "win",
+                src: "assets/sounds/win.mp3",
+                volume: 0.1,
             }
         ];
-        GameHowler.getInstance(sounds)
+        const soundsManager = SoundsManager.getInstance()
+        await soundsManager.loadSounds(sounds);
     }
 }

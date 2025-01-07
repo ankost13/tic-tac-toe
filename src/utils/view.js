@@ -1,5 +1,6 @@
 import {Container} from "pixi.js";
 import {GLOBAL_EMITTER} from "./eventEmitter";
+import {SoundsManager} from "./howler";
 
 export class View extends Container {
     constructor(parent) {
@@ -7,6 +8,7 @@ export class View extends Container {
         parent.addChild(this);
 
         this.initEmitter();
+        this.initSoundsManager();
     }
 
     initEmitter() {
@@ -17,4 +19,7 @@ export class View extends Container {
         this.emitter.emit(notification, data);
     }
 
+    initSoundsManager() {
+        this.soundsManager = SoundsManager.getInstance();
+    }
 }

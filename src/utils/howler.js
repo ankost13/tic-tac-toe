@@ -1,27 +1,39 @@
+import { Howl } from 'howler';
+
 let instance = null;
 
-export class GameHowler {
+export class SoundsManager {
 
-    constructor(soundsData) {
-        this.sounds = [];
-        console.error(soundsData)
-        soundsData.forEach((item) => {
-            const sound = new Howl(item);
-            this.sounds.push(sound);
-        });
+    loadSounds(soundsData) {
+        return new Promise((resolve, reject) => {
+            this.sounds = [];
+            let downloadSounds = 0;
+            soundsData.forEach((item) => {
+                const sound = new Howl({
+                    ...item,
+                    onload: () => {
+                        downloadSounds++;
+                        if (downloadSounds === soundsData.length) {
+                            resolve();
+                        }
+                    }
+                });
+                sound.name = item.name;
+                this.sounds.push(sound);
+            });
+        })
+
     }
 
-    static getInstance(soundsData) {
-        if (!soundsData) return
-        console.error(instance)
+    static getInstance() {
         if (instance === null) {
-            return new GameHowler(soundsData);
-        } else {
-            return instance;
+            instance =  new SoundsManager();
         }
+
+        return instance;
     }
 
-    play(soundName) {
+    play(soundName, volume) {
         let sound = null;
         this.sounds.forEach( el=> {
             if (el.name === soundName) {
@@ -31,8 +43,14 @@ export class GameHowler {
 
         if (sound) {
             sound.play();
+            if (volume) {
+                sound.volume(volume);
+            }
         } else {
             console.error(`Звук "${soundName}" не знайдено.`);
         }
+
+        console.error(sound.volume())
     }
+
 }
