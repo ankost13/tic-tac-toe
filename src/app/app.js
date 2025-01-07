@@ -10,13 +10,15 @@ import {FieldMediator} from "../modules/gameField/fieldMediator";
 import {GameLogicMediator} from "../modules/gameLogic/gameLogicMediator";
 import {PopupMediator} from "../modules/popup/popupMediator";
 import {PopupView} from "../modules/popup/popupView";
+import {GameHowler} from "../utils/howler";
 
 export class App extends Application {
 
     constructor(data) {
         super(data)
 
-        this.registerPreloader()
+        this.registerPreloader();
+        this.initSounds();
         this.gameMediator = new GameMediator();
         this.loadAssets().then(() => {
             this.gameMediator.resourcesLoaded();
@@ -64,5 +66,16 @@ export class App extends Application {
         const parent = new Container();
         this.stage.addChild(parent);
         mediator.initView(PopupView, parent)
+    }
+
+    initSounds() {
+        const sounds = [
+            {
+                name: "backgroundSound",
+                src: "assets/sounds/backgroundSound.mp3",
+                volume: 1,
+            }
+        ];
+        GameHowler.getInstance(sounds)
     }
 }

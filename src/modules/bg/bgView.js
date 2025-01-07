@@ -1,5 +1,8 @@
 import {View} from "../../utils/view";
 import {Assets, Sprite} from "pixi.js";
+import {setAnimationTimeoutSync} from "../../utils/helperFunction";
+import {Howl} from "howler";
+import {GameHowler} from "../../utils/howler";
 
 export class BgView extends View {
     constructor(parent) {
@@ -7,6 +10,10 @@ export class BgView extends View {
 
         this.createBgSprite();
         this.position.set(window.innerWidth / 2, window.innerHeight / 2);
+        setAnimationTimeoutSync(3).then(() => {
+            this.playBgSound();
+        })
+
     }
 
     createBgSprite() {
@@ -22,4 +29,7 @@ export class BgView extends View {
         this.addChild(this.bg);
     }
 
+    playBgSound() {
+        GameHowler.getInstance().play("backgroundSound")
+    }
 }

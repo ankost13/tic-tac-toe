@@ -132,6 +132,7 @@
     "has-symbols": "^1.1.0",
     "hasown": "^2.0.2",
     "he": "^1.2.0",
+    "howler": "^2.2.4",
     "hpack.js": "^2.1.6",
     "html-minifier-terser": "^6.1.0",
     "htmlparser2": "^6.1.0",
