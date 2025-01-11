@@ -23,7 +23,7 @@ export class BgView extends View {
         this.addChild(this.bg);
     }
 
-    async playBgSound() {
+   playBgSound() {
         this.soundsManager.play("backgroundSound", 0.1);
     }
 }

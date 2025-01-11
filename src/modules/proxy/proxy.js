@@ -48,5 +48,11 @@ export class Proxy { //для даних
         return this.whoseTurn;
     }
 
+    countWinner(data){
+        localStorage.x = data.x || 0;
+        localStorage.o = data.o || 0;
+        localStorage.draw = data.d || 0;
+    }
+
 }
 

@@ -49,8 +49,6 @@ export class SoundsManager {
         } else {
             console.error(`Звук "${soundName}" не знайдено.`);
         }
-
-        console.error(sound.volume())
     }
 
 }

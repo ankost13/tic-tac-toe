@@ -9,6 +9,7 @@ export const manifest = {
                 x: "assets/img/x.png",
                 popup: "assets/img/popup.png",
                 line: "assets/img/line.png",
+                scoreboard: "assets/img/scoreboard.png",
             }
         },
     ]

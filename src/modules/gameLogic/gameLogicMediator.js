@@ -19,6 +19,9 @@ export class GameLogicMediator extends BaseMediator {
         } else {
             this.computerStep();
         }
+
+        this.oNotWin = false;
+        this.xNotWin = false;
     }
 
     catchNotification() {
@@ -27,6 +30,8 @@ export class GameLogicMediator extends BaseMediator {
             if (this.checkResultGame("x")) {
 
                 return
+            } else {
+                this.xNotWin = true;
             }
             this.removeIndex(index);
 
@@ -45,16 +50,16 @@ export class GameLogicMediator extends BaseMediator {
         if (!this.proxy.indexes.length) return;
 
         const index = randomInteger(0, this.proxy.indexes.length - 1);
-        this.proxy.setMapField(parseInt(this.proxy.indexes[index] / 3 + ""), this.proxy.indexes[index] % 3, "0");
-        if (this.checkResultGame("0")) {
+        this.proxy.setMapField(parseInt(this.proxy.indexes[index] / 3 + ""), this.proxy.indexes[index] % 3, "o");
+        if (this.checkResultGame("o")) {
             this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.proxy.indexes[index], isEnd: true});
             return
+        } else {
+            this.oNotWin = true;
         }
         this.sendNotification(GameFieldNotification.COMPUTER_STEP, {index: this.proxy.indexes[index], isEnd: false});
         this.removeIndex(this.proxy.indexes[index]);
-        this.checkDrawResult();
     }
-
 
      checkResultGame(indicator) {
         if (this.proxy.mapField[0][0] === this.proxy.mapField[0][1] && this.proxy.mapField[0][0] === this.proxy.mapField[0][2] && this.proxy.mapField[0][0] === indicator) {
@@ -85,11 +90,13 @@ export class GameLogicMediator extends BaseMediator {
     }
 
     checkDrawResult() {
-        if ((this.proxy.indexes.length === 0) && (!this.checkResultGame("x")) && (!this.checkResultGame("0"))) {
+        if ((this.proxy.indexes.length === 0) && (this.oNotWin) && (this.xNotWin)) {
             setAnimationTimeoutSync(0.5).then(() => {
                 this.sendNotification(PopupNotificationNotification.WINNER, "draw");
             })
             this.resetGame();
+            let count = +localStorage.getItem("draw") + 1;
+            this.proxy.countWinner({x: localStorage.getItem("x"), o: localStorage.getItem("o"), d: count});
         }
     }
 
@@ -99,6 +106,13 @@ export class GameLogicMediator extends BaseMediator {
             this.sendNotification(PopupNotificationNotification.WINNER, set.indicator);
         })
         this.resetGame();
+
+        let count = +localStorage.getItem(set.indicator) + 1;
+        if (set.indicator === "x") {
+            this.proxy.countWinner({x: count, o: localStorage.getItem("o"), d: localStorage.getItem("draw")});
+        } else {
+            this.proxy.countWinner({x: localStorage.getItem("x"), o: count, d: localStorage.getItem("draw")});
+        }
     }
 
     resetGame() {
@@ -109,5 +123,6 @@ export class GameLogicMediator extends BaseMediator {
             this.startGame();
         })
     }
+
 }
 
