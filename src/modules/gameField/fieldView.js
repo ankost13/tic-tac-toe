@@ -1,5 +1,5 @@
 import {View} from "../../utils/view";
-import {Assets, Container, Sprite, TextStyle, Text, Point} from "pixi.js";
+import {Assets, Container, Sprite, Text, Point} from "pixi.js";
 import {setAnimationTimeoutSync} from "../../utils/helperFunction";
 import gsap from 'gsap';
 

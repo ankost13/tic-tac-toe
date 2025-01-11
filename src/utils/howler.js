@@ -5,7 +5,7 @@ let instance = null;
 export class SoundsManager {
 
     loadSounds(soundsData) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             this.sounds = [];
             let downloadSounds = 0;
             soundsData.forEach((item) => {
