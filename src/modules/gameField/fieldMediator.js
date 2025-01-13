@@ -19,7 +19,7 @@ export class FieldMediator extends BaseMediator {
         });
 
         this.subscribeToNotification(GameFieldNotification.WINNER_COMBINATION, (data) => {
-            this.view.showWinnersCombination(data);
+            this.view.showWinnersLines(data);
         });
 
         this.subscribeToNotification(GameFieldNotification.REFRESH_FIELD, () => {

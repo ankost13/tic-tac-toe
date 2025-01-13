@@ -15,6 +15,7 @@ export class FieldView extends View {
         this.createInteractiveSquare();
         this.addEventSquare();
         this.createScoreboard();
+        this.createWinnersCombination();
     }
 
     createFieldSprite() {
@@ -84,19 +85,41 @@ export class FieldView extends View {
         }
     }
 
-    showWinnersCombination(data) {
-        this.winnersLine = new Sprite({
-            texture: Assets.get("line"),
+    showWinnersLines(data) {
+        this.winnersLine.anchor.set(data.x, data.y);
+        this.winnersLine.scale.set(0, 0);
+        this.winnersLine.angle = data.angle;
+        this.addAnimationForWinnersLine(data);
+    }
+
+    addAnimationForWinnersLine(data) {
+        gsap.to(this.winnersLine, {
             alpha: 1,
-            anchor: {
-                x: data.x,
-                y: data.y,
-            },
-            scale: {
+            duration: .3,
+        });
+        gsap.timeline()
+            .to(this.winnersLine.scale, {
+                duration: .4,
+                x: data.scaleX + .05,
+                y: data.scaleY + .05,
+            })
+            .to(this.winnersLine.scale, {
+                duration: .3,
                 x: data.scaleX,
                 y: data.scaleY,
-            },
-            angle: data.angle,
+            })
+            .to({}, { duration: 1})
+            .to(this.winnersLine.scale, {
+                duration: .5,
+                x: 0,
+                y: 0,
+            });
+    }
+
+    createWinnersCombination() {
+        this.winnersLine = new Sprite({
+            texture: Assets.get("line"),
+            alpha: .1,
         })
 
         this.addChild(this.winnersLine);
@@ -109,7 +132,6 @@ export class FieldView extends View {
             square.alpha = 0;
             square.inUsed = false;
         })
-        this.winnersLine.destroy({children: true});
         this.updateStatisticText()
     }
 
@@ -138,17 +160,17 @@ export class FieldView extends View {
     }
 
     updateStatisticText() {
-        if (this.xStatistic.text !== "X: " + (localStorage.getItem("x") || 0) ) {
+        if (this.xStatistic.text !== "X: " + (localStorage.getItem("x") || 0)) {
             this.xStatistic.text = "X: " + (localStorage.getItem("x") || 0)
             this.animationTextOnScoreboard(this.xStatistic);
-        } else if (this.oStatistic.text !== "O: " + (localStorage.getItem("o") || 0) ) {
+        } else if (this.oStatistic.text !== "O: " + (localStorage.getItem("o") || 0)) {
             this.oStatistic.text = "O: " + (localStorage.getItem("o") || 0)
-                this.animationTextOnScoreboard(this.oStatistic);
-            } else if ( this.drawStatistic.text !== "DROW: " + (localStorage.getItem("draw") || 0) ) {
+            this.animationTextOnScoreboard(this.oStatistic);
+        } else if (this.drawStatistic.text !== "DROW: " + (localStorage.getItem("draw") || 0)) {
             this.drawStatistic.text = "DROW: " + (localStorage.getItem("draw") || 0)
-                this.animationTextOnScoreboard( this.drawStatistic);
-                }
+            this.animationTextOnScoreboard(this.drawStatistic);
         }
+    }
 
     animationTextOnScoreboard (partOfText) {
         gsap.to(partOfText.scale, {
