@@ -1,6 +1,6 @@
 import {Container} from "pixi.js";
 import {GLOBAL_EMITTER} from "./eventEmitter";
-import {SoundsManager} from "./howler";
+import {SoundsManager} from "./soundsManager";
 
 export class View extends Container {
     constructor(parent) {

@@ -10,7 +10,7 @@ import {FieldMediator} from "../modules/gameField/fieldMediator";
 import {GameLogicMediator} from "../modules/gameLogic/gameLogicMediator";
 import {PopupMediator} from "../modules/popup/popupMediator";
 import {PopupView} from "../modules/popup/popupView";
-import {SoundsManager} from "../utils/howler";
+import {SoundsManager} from "../utils/soundsManager";
 
 export class App extends Application {
 
