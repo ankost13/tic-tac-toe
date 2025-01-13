@@ -23,7 +23,7 @@ export class BaseMediator {
         this.emitter.emit(notification, data);
     }
 
-    mapNotification(notification, callback) {
+    subscribeToNotification(notification, callback) {
         this.emitter.on(notification, (data) => {
             callback(data)
         });

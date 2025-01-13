@@ -25,7 +25,7 @@ export class GameLogicMediator extends BaseMediator {
     }
 
     catchNotification() {
-        this.mapNotification(GameFieldNotification.SQUARE_ON_CLICK, async (index) => {
+        this.subscribeToNotification(GameFieldNotification.SQUARE_ON_CLICK, async (index) => {
             this.proxy.setMapField(parseInt(index / 3 + ""), index % 3, "x");
             if (this.checkResultGame("x")) {
 

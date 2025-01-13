@@ -8,7 +8,7 @@ export class PopupMediator extends BaseMediator {
     }
 
     catchOutNotification() {
-        this.mapNotification(PopupNotificationNotification.WINNER, (indicator) => {
+        this.subscribeToNotification(PopupNotificationNotification.WINNER, (indicator) => {
          this.view.playAnimation("The winner is " + indicator);
         });
     }
